@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Trainer:</b>
+  <%= @connection.trainer_id %>
+</p>
+
+<p>
+  <b>Trainee:</b>
+  <%= @connection.trainee_id %>
+</p>
+
+<p>
+  <b>Confirmed:</b>
+  <%= @connection.confirmed %>
+</p>
+
+
+<%= link_to 'Edit', edit_connection_path(@connection) %> |
+<%= link_to 'Back', connections_path %>

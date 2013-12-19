@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  creator_id: 1
+  status: MyString
+  due_date: 2013-12-19
+  snooze_count: 1
+  title: MyString
+  notes: MyText
+  user_interest_rating: 1
+  user_toughness_rating: 1
+
+two:
+  user_id: 1
+  creator_id: 1
+  status: MyString
+  due_date: 2013-12-19
+  snooze_count: 1
+  title: MyString
+  notes: MyText
+  user_interest_rating: 1
+  user_toughness_rating: 1

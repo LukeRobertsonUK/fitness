@@ -1,0 +1,29 @@
+<h1>Listing personal_bests</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Exercise</th>
+    <th>Weight</th>
+    <th>Weight unit</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @personal_bests.each do |personal_best| %>
+  <tr>
+    <td><%= personal_best.user_id %></td>
+    <td><%= personal_best.exercise_id %></td>
+    <td><%= personal_best.weight %></td>
+    <td><%= personal_best.weight_unit %></td>
+    <td><%= link_to 'Show', personal_best %></td>
+    <td><%= link_to 'Edit', edit_personal_best_path(personal_best) %></td>
+    <td><%= link_to 'Destroy', personal_best, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Personal best', new_personal_best_path %>

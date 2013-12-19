@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @workout.user_id %>
+</p>
+
+<p>
+  <b>Creator:</b>
+  <%= @workout.creator_id %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @workout.status %>
+</p>
+
+<p>
+  <b>Due date:</b>
+  <%= @workout.due_date %>
+</p>
+
+<p>
+  <b>Snooze count:</b>
+  <%= @workout.snooze_count %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @workout.title %>
+</p>
+
+<p>
+  <b>Notes:</b>
+  <%= @workout.notes %>
+</p>
+
+<p>
+  <b>User interest rating:</b>
+  <%= @workout.user_interest_rating %>
+</p>
+
+<p>
+  <b>User toughness rating:</b>
+  <%= @workout.user_toughness_rating %>
+</p>
+
+
+<%= link_to 'Edit', edit_workout_path(@workout) %> |
+<%= link_to 'Back', workouts_path %>

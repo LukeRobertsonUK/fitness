@@ -1,0 +1,37 @@
+<h1>Listing components</h1>
+
+<table>
+  <tr>
+    <th>Activity</th>
+    <th>Exercise</th>
+    <th>Reps</th>
+    <th>Distance</th>
+    <th>Interval</th>
+    <th>Distance units</th>
+    <th>Interval units</th>
+    <th>Notes</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @components.each do |component| %>
+  <tr>
+    <td><%= component.activity_id %></td>
+    <td><%= component.exercise_id %></td>
+    <td><%= component.reps %></td>
+    <td><%= component.distance %></td>
+    <td><%= component.interval %></td>
+    <td><%= component.distance_units %></td>
+    <td><%= component.interval_units %></td>
+    <td><%= component.notes %></td>
+    <td><%= link_to 'Show', component %></td>
+    <td><%= link_to 'Edit', edit_component_path(component) %></td>
+    <td><%= link_to 'Destroy', component, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Component', new_component_path %>

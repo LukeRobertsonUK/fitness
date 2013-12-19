@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  trainer_id: 1
+  trainee_id: 1
+  confirmed: false
+
+two:
+  trainer_id: 1
+  trainee_id: 1
+  confirmed: false

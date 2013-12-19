@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Activity:</b>
+  <%= @component.activity_id %>
+</p>
+
+<p>
+  <b>Exercise:</b>
+  <%= @component.exercise_id %>
+</p>
+
+<p>
+  <b>Reps:</b>
+  <%= @component.reps %>
+</p>
+
+<p>
+  <b>Distance:</b>
+  <%= @component.distance %>
+</p>
+
+<p>
+  <b>Interval:</b>
+  <%= @component.interval %>
+</p>
+
+<p>
+  <b>Distance units:</b>
+  <%= @component.distance_units %>
+</p>
+
+<p>
+  <b>Interval units:</b>
+  <%= @component.interval_units %>
+</p>
+
+<p>
+  <b>Notes:</b>
+  <%= @component.notes %>
+</p>
+
+
+<%= link_to 'Edit', edit_component_path(@component) %> |
+<%= link_to 'Back', components_path %>
