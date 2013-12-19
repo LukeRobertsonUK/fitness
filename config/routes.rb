@@ -1,6 +1,9 @@
 FitnessApp::Application.routes.draw do
 
 
+  resources :weight_records
+
+
   resources :exercise_instructions
 
 

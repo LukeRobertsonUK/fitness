@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Weight:</b>
+  <%= @weight_record.weight %>
+</p>
+
+<p>
+  <b>Weight unit:</b>
+  <%= @weight_record.weight_unit %>
+</p>
+
+<p>
+  <b>Component:</b>
+  <%= @weight_record.component_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_weight_record_path(@weight_record) %> |
+<%= link_to 'Back', weight_records_path %>
