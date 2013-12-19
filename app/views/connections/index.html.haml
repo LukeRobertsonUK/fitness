@@ -1,0 +1,22 @@
+%h1 Connections
+
+- unless @connections_as_trainee.blank?
+  %h2 The following Connections can set Workouts for you to complete
+  -@connections_as_trainee.each do |connection|
+    %li
+      = connection.trainer.email
+
+- unless @connections_as_trainer.blank?
+  %h2 You can set Workouts for the following Connections
+  -@connections_as_trainer.each do |connection|
+    %li
+      = connection.trainee.email
+
+- unless @connection_requests.blank?
+  %h2 Incoming Connection Requests
+  %p The following people would like you to be able to set Workouts for them to conmplete
+  -@connection_requests.each do |request|
+    %li
+      = request.trainee.email
+      = link_to "Accept Connection", edit_connection_path(request)
+      = link_to "Deny Connection", request, method: :delete, data: { confirm: 'Are you sure?' }

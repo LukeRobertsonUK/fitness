@@ -25,6 +25,9 @@ FitnessApp::Application.routes.draw do
   resources :exercises
 
 
+  get '/users', to: "users#index", as: 'users'
+
+
   devise_for :users
 
 root :to => "exercises#index"

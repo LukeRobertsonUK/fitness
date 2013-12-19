@@ -2,7 +2,21 @@ class ConnectionsController < ApplicationController
   # GET /connections
   # GET /connections.json
   def index
-    @connections = Connection.all
+    @connections_as_trainee = Connection.where({
+        trainee_id: current_user.id,
+        confirmed: true
+      })
+
+     @connections_as_trainer= Connection.where({
+        trainer_id: current_user.id,
+        confirmed: true
+      })
+
+    @connection_requests = Connection.where({
+        trainer_id: current_user.id,
+        confirmed: nil
+      })
+
 
     respond_to do |format|
       format.html # index.html.erb
@@ -24,7 +38,11 @@ class ConnectionsController < ApplicationController
   # GET /connections/new
   # GET /connections/new.json
   def new
+    @trainee = current_user
+    @trainer = User.find(params[:trainer_id])
     @connection = Connection.new
+    @connection.trainee_id = @trainee.id
+    @connection.trainer_id = @trainer.id
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,6 +53,8 @@ class ConnectionsController < ApplicationController
   # GET /connections/1/edit
   def edit
     @connection = Connection.find(params[:id])
+    @trainer = @connection.trainer
+    @trainee = @connection.trainee
   end
 
   # POST /connections
@@ -44,7 +64,7 @@ class ConnectionsController < ApplicationController
 
     respond_to do |format|
       if @connection.save
-        format.html { redirect_to @connection, notice: 'Connection was successfully created.' }
+        format.html { redirect_to @connection, notice: 'Your Connection Request was successfully sent.' }
         format.json { render json: @connection, status: :created, location: @connection }
       else
         format.html { render action: "new" }
@@ -57,10 +77,10 @@ class ConnectionsController < ApplicationController
   # PUT /connections/1.json
   def update
     @connection = Connection.find(params[:id])
-
+    @connection.confirmed = true
     respond_to do |format|
       if @connection.update_attributes(params[:connection])
-        format.html { redirect_to @connection, notice: 'Connection was successfully updated.' }
+        format.html { redirect_to @connection, notice: 'Connection was successfully accepted.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

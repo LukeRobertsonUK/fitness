@@ -1,0 +1,8 @@
+%h1 List of users who want to trainer
+%p users will come here to make outgoing connections to people they want to train them
+
+%ul
+  - @users.each do |user|
+    %li
+      =user.email
+      = link_to "Connect", new_connection_path(trainer_id: user.id)
