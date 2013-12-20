@@ -12,4 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery_nested_form
+//= require jquery-ui-1.10.3.custom.js
 //= require_tree .

@@ -31,4 +31,5 @@ FitnessApp::Application.routes.draw do
   devise_for :users
 
 root :to => "exercises#index"
+get'/list', to: "exercises#list", as: 'list'
 end

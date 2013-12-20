@@ -1,0 +1,17 @@
+= f.fields_for :components do |components_form|
+  .field
+    =components_form.label :exercise_name
+    =components_form.text_field :exercise_name, class: "exercise_entry"
+
+  .field
+    =components_form.label :reps
+    =components_form.number_field :reps
+  .field
+    =components_form.label :distance
+    =components_form.number_field :distance
+  .field
+    =components_form.label :interval
+    =components_form.number_field :interval
+
+  = components_form.link_to_remove 'Remove'
+= f.link_to_add 'Add Exercise Component', :components

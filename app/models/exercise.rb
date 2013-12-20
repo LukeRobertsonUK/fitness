@@ -5,4 +5,7 @@ class Exercise < ActiveRecord::Base
   has_many :set_records, through: :components
   has_many :personal_bests
   has_many :exercise_instructions
+
+
+
 end

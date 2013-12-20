@@ -24,7 +24,7 @@ class ActivitiesController < ApplicationController
   # GET /activities/new
   # GET /activities/new.json
   def new
-    @activity = Activity.new
+    @activity = Activity.new(workout_id: params[:workout_id])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,6 +41,11 @@ class ActivitiesController < ApplicationController
   # POST /activities.json
   def create
     @activity = Activity.new(params[:activity])
+    @exercises_hash = params[:activity][:components_attributes]
+
+    @exercises_hash.each_value do |value|
+      exercise = Exercise.find_or_create_by_name(value[:exercise_name]){ |e| e.creator_id = current_user.id}
+    end
 
     respond_to do |format|
       if @activity.save

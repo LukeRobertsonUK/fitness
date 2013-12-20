@@ -1,4 +1,16 @@
 class ExercisesController < ApplicationController
+
+  # used to provide the list for exercise autocomplete in components nested form.
+  def list
+    list = []
+    exercises = Exercise.where("lower(name) LIKE ?", "%#{params[:term].downcase}%").limit(10)
+    exercises.each { |exercise| list <<  exercise.name}
+
+    respond_to do |format|
+      format.json {render json: list.to_json, layout: false}
+    end
+  end
+
   # GET /exercises
   # GET /exercises.json
   def index

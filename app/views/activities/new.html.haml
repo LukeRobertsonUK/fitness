@@ -1,0 +1,10 @@
+%h1
+  = "New Activity for #{@activity.workout.title}"
+%h2
+  = "For: #{@activity.workout.user.email}"
+%h3
+  = "Due: #{@activity.workout.due_date}"
+
+= render 'form'
+
+= link_to 'Back', workouts_path(@activity.workout)
