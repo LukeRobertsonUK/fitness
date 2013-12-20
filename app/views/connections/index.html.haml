@@ -11,6 +11,7 @@
   -@connections_as_trainer.each do |connection|
     %li
       = connection.trainee.email
+      = link_to "Set Workout", new_workout_path(user_id: connection.trainee.id)
 
 - unless @connection_requests.blank?
   %h2 Incoming Connection Requests

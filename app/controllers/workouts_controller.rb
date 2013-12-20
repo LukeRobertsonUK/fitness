@@ -2,7 +2,7 @@ class WorkoutsController < ApplicationController
   # GET /workouts
   # GET /workouts.json
   def index
-    @workouts = Workout.all
+    @workouts_under_construction = Workout.where({creator_id: current_user.id, status: "under_construction"})
 
     respond_to do |format|
       format.html # index.html.erb
@@ -24,7 +24,7 @@ class WorkoutsController < ApplicationController
   # GET /workouts/new
   # GET /workouts/new.json
   def new
-    @workout = Workout.new
+    @workout = Workout.new(user_id: params[:user_id])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,6 +41,9 @@ class WorkoutsController < ApplicationController
   # POST /workouts.json
   def create
     @workout = Workout.new(params[:workout])
+    @workout.creator_id = current_user.id
+    @workout.status = "under_construction"
+    @workout.snooze_count = 0
 
     respond_to do |format|
       if @workout.save

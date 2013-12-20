@@ -1,0 +1,17 @@
+%p#notice
+  = notice
+
+%h1
+  = @workout.title
+%h2
+  = "For: #{@workout.user.email}"
+%h3
+  = "Due: #{@workout.due_date}"
+%p
+  = @workout.notes
+%p
+  = link_to "Edit", edit_workout_path(@workout)
+%p
+  = link_to "Add An Activity", new_activity_path(workout_id: @workout.id)
+
+= link_to 'Back', workouts_path

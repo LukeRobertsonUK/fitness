@@ -1,0 +1,6 @@
+%h1
+  = @workout.user == current_user ? "New Personal Workout" : "New Workout for #{@workout.user.email}"
+%p
+  Please enter a Title and Due-Date for this workout, and enter any notes or instructions to be displayed along with the workout.
+= render 'form'
+= link_to 'Back', workouts_path
