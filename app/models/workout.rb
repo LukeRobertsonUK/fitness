@@ -3,6 +3,6 @@ class Workout < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :creator, class_name: "User"
-  has_many :activities
+  has_many :activities, order: :position
   has_many :components, through: :activities
 end

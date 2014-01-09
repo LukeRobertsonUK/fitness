@@ -21,4 +21,9 @@ $(function() {
     autoCompleteExercise(exerciseSelector);
   })
 
+
+
+
+
+
 });

@@ -16,6 +16,7 @@ gem 'aasm'
 gem "amoeba"
 gem 'bootstrap-kaminari-views'
 gem 'possessive'
+gem 'acts_as_list'
 
 group :development do
   gem 'pry-rails'

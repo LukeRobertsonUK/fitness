@@ -5,7 +5,7 @@ class Activity < ActiveRecord::Base
   has_many :exercises, through: :components
   has_one :creator, through: :workout
   accepts_nested_attributes_for :components, allow_destroy: true
-
+  acts_as_list scope: :workout
 
 
 

@@ -1,0 +1,19 @@
+%li
+  %p
+    = "#{activity.sets} sets of..."
+  %ul
+    - activity.components.each do |component|
+      %li
+        = component.exercise.name
+  %p
+    = "...follwed by #{activity.rest} seconds rest."
+  %p
+    = link_to "edit", edit_activity_path(activity)
+    |
+    = link_to 'remove', activity, method: :delete, data: { confirm: 'Are you sure?' }
+  %p
+    - unless activity.position == 1
+      = link_to 'up', move_in_list_activity_path(activity, direction: 'up'),{remote: true, method: :put}
+    |
+    -unless activity.position == Activity.count
+      = link_to 'down', move_in_list_activity_path(activity, direction: 'down'), {remote: true, method: :put}

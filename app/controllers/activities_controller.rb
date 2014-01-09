@@ -1,4 +1,25 @@
 class ActivitiesController < ApplicationController
+
+  def move_in_list
+
+    @activity = Activity.find(params[:id])
+    case params[:direction]
+    when 'up'
+      @activity.move_higher
+    when 'down'
+      @activity.move_lower
+    end
+    @workout = @activity.workout
+
+    respond_to do |format|
+      format.js {}
+    end
+    # redirect_to @activity.workout
+  end
+
+
+
+
   # GET /activities
   # GET /activities.json
   def index
@@ -44,7 +65,8 @@ class ActivitiesController < ApplicationController
     @exercises_hash = params[:activity][:components_attributes]
 
     @exercises_hash.each_value do |value|
-      exercise = Exercise.find_or_create_by_name(value[:exercise_name]){ |e| e.creator_id = current_user.id}
+      exercise = Exercise.find_by_name(value[:exercise_name]){ |e| e.creator_id ||= current_user.id} unless value[:exercise_name].blank?
+      exercise.save!
     end
 
     respond_to do |format|
@@ -62,9 +84,14 @@ class ActivitiesController < ApplicationController
   # PUT /activities/1.json
   def update
     @activity = Activity.find(params[:id])
+    @exercises_hash = params[:activity][:components_attributes]
 
     respond_to do |format|
       if @activity.update_attributes(params[:activity])
+         @exercises_hash.each_value do |value|
+           exercise = Exercise.find_by_name(value[:exercise_name]){ |e| e.creator_id ||= current_user.id} unless value[:exercise_name].blank?
+           exercise.save!
+         end
         format.html { redirect_to @activity, notice: 'Activity was successfully updated.' }
         format.json { head :no_content }
       else

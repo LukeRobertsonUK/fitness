@@ -11,6 +11,13 @@
   = @workout.notes
 %p
   = link_to "Edit", edit_workout_path(@workout)
+
+%ul#activity_list
+  = render @workout.activities
+
+
+
+
 %p
   = link_to "Add An Activity", new_activity_path(workout_id: @workout.id)
 

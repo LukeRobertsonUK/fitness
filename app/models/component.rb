@@ -12,6 +12,7 @@ class Component < ActiveRecord::Base
 
 
   def exercise_name=(name)
+    self.exercise = Exercise.find_or_create_by_name(name) unless name.blank?
   end
 
 

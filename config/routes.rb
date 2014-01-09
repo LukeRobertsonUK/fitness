@@ -13,7 +13,11 @@ FitnessApp::Application.routes.draw do
   resources :components
 
 
-  resources :activities
+  resources :activities do
+    member do
+      put 'move/:direction', to: 'activities#move_in_list', as: 'move_in_list'
+    end
+  end
 
 
   resources :workouts
