@@ -1,5 +1,5 @@
 class Component < ActiveRecord::Base
-  attr_accessible :activity_id, :distance, :distance_units, :exercise_id, :interval, :interval_units, :notes, :reps, :exercise_name
+  attr_accessible :activity_id, :distance, :distance_units, :exercise_id, :interval, :interval_units, :notes, :reps, :exercise_name, :to_failure
   belongs_to :activity
   belongs_to :exercise
   has_many :weight_records

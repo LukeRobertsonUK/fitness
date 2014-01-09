@@ -2,16 +2,26 @@
   .field
     =components_form.label :exercise_name
     =components_form.text_field :exercise_name, class: "exercise_entry"
-
+  .field
+    =components_form.label :to_failure, "To Failure!"
+    =components_form.check_box :to_failure
   .field
     =components_form.label :reps
     =components_form.number_field :reps
   .field
     =components_form.label :distance
     =components_form.number_field :distance
+    =components_form.radio_button :distance_units, 'metres', checked: true
+    =components_form.label :distance_units_metres, 'metres'
+    =components_form.radio_button :distance_units, 'kilometres'
+    =components_form.label :distance_units_kilometres, 'kilometres'
   .field
     =components_form.label :interval
     =components_form.number_field :interval
+    =components_form.radio_button :interval_units, 'seconds', checked: true
+    =components_form.label :interval_units_seconds, 'seconds'
+    =components_form.radio_button :interval_units, 'minutes'
+    =components_form.label :interval_units_minutes, 'minutes'
 
   = components_form.link_to_remove 'Remove'
 = f.link_to_add 'Add Exercise Component', :components

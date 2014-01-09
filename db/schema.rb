@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140109161340) do
+ActiveRecord::Schema.define(:version => 20140109185053) do
 
   create_table "activities", :force => true do |t|
     t.integer  "workout_id"
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(:version => 20140109161340) do
     t.string   "notes"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "position"
+    t.boolean  "to_failure"
   end
 
   create_table "connections", :force => true do |t|
