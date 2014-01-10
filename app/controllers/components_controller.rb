@@ -60,7 +60,7 @@ class ComponentsController < ApplicationController
 
     respond_to do |format|
       if @component.update_attributes(params[:component])
-        format.html { redirect_to @component, notice: 'Component was successfully updated.' }
+        format.html { redirect_to @component.activity.workout, notice: 'Component was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

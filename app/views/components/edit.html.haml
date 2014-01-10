@@ -1,0 +1,6 @@
+%h1
+  = component_heading_for_weight_entry(@component)
+
+= render 'form'
+
+= link_to '', workout_path(@component.activity.workout), class: "glyphicon glyphicon-arrow-left mediumbutton"

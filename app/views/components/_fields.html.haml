@@ -1,0 +1,10 @@
+%p Click the green button to being begin adding weight records to the exercise.
+= f.fields_for :weight_records do |wr_form|
+  .field
+    = wr_form.link_to_remove '', class: "glyphicon glyphicon-remove-circle minibutton remove"
+    = wr_form.number_field :weight
+    = wr_form.radio_button :weight_unit, 'kg', checked: true
+    = wr_form.label :weight_unit_kg, 'kg'
+    = wr_form.radio_button :weight_unit, 'lb'
+    = wr_form.label :weight_unit_lb, 'lb'
+= f.link_to_add '', :weight_records, class: "glyphicon glyphicon-plus-sign minibutton add"

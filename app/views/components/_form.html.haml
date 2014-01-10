@@ -1,0 +1,16 @@
+= nested_form_for(@component) do |f|
+  - if @component.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@component.errors.count, "error")
+        prohibited this component from being saved:
+      %ul
+        - @component.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :notes
+    = f.text_field :notes
+  - if (@component.exercise_type == "Reps" || @component.exercise_type == "To Failure")
+    =render 'fields', f: f
+  .actions
+    = f.submit "Save", class: "btn btn-danger btn-sm"

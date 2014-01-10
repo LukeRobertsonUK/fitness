@@ -1,27 +1,25 @@
+%p Click the green button to being begin adding exercises to the Activity. Add more than one exercise to create a superset.
 = f.fields_for :components do |components_form|
   .field
-    =components_form.label :exercise_name
+    = components_form.link_to_remove '', class: "glyphicon glyphicon-remove-circle minibutton remove"
+    =components_form.label :exercise_name, "Exercise"
     =components_form.text_field :exercise_name, class: "exercise_entry"
-  .field
-    =components_form.label :to_failure, "To Failure!"
-    =components_form.check_box :to_failure
-  .field
-    =components_form.label :reps
-    =components_form.number_field :reps
-  .field
-    =components_form.label :distance
-    =components_form.number_field :distance
-    =components_form.radio_button :distance_units, 'metres', checked: true
-    =components_form.label :distance_units_metres, 'metres'
-    =components_form.radio_button :distance_units, 'kilometres'
-    =components_form.label :distance_units_kilometres, 'kilometres'
-  .field
-    =components_form.label :interval
-    =components_form.number_field :interval
-    =components_form.radio_button :interval_units, 'seconds', checked: true
-    =components_form.label :interval_units_seconds, 'seconds'
-    =components_form.radio_button :interval_units, 'minutes'
-    =components_form.label :interval_units_minutes, 'minutes'
+    =components_form.select(:exercise_type, ['Reps', 'Distance', 'Interval', "To Failure"], {}, {class: "exercise_type"})
+    .field.reps_field
+      =components_form.number_field :reps
+      =components_form.label :reps
+    .field.distance_field
+      =components_form.number_field :distance
+      =components_form.radio_button :distance_units, 'metres', checked: true
+      =components_form.label :distance_units_metres, 'metres'
+      =components_form.radio_button :distance_units, 'kilometres'
+      =components_form.label :distance_units_kilometres, 'kilometres'
+    .field.interval_field
+      =components_form.number_field :interval
+      =components_form.radio_button :interval_units, 'seconds', checked: true
+      =components_form.label :interval_units_seconds, 'seconds'
+      =components_form.radio_button :interval_units, 'minutes'
+      =components_form.label :interval_units_minutes, 'minutes'
 
-  = components_form.link_to_remove 'Remove'
-= f.link_to_add 'Add Exercise Component', :components
+
+= f.link_to_add '', :components, class: "glyphicon glyphicon-plus-sign minibutton add"

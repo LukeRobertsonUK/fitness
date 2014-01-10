@@ -1,25 +1,25 @@
 module ApplicationHelper
 
-
-
 def component_heading(component)
-  if component.to_failure
-    "#{component.exercise_name}: to failure"
-  elsif component.reps
-    "#{component.exercise_name}: #{pluralize(component.reps, 'rep')}"
-  elsif component.interval
-    case component.interval_units
-    when "seconds" then "#{component.exercise_name}: #{pluralize(component.interval, 'second')}"
-    when "minutes" then "#{component.exercise_name}: #{pluralize(component.interval, 'minute')}"
-    end
-  elsif component.distance
-    case component.distance_units
-    when "metres" then "#{component.exercise_name}: #{pluralize(component.distance, 'metre')}"
-    when "kilometres" then "#{component.exercise_name}: #{pluralize(component.distance, 'kilometre')}"
-    end
+  case component.exercise_type
+  when "To Failure" then "#{component.exercise_name} to failure"
+  when "Reps" then "#{component.exercise_name}: #{pluralize(component.reps, 'rep')}"
+  when "Interval" then component.interval_units == "seconds" ? "#{component.exercise_name} for #{pluralize(component.interval, 'second')}" : "#{component.exercise_name} for #{pluralize(component.interval, 'minute')}"
+  when "Distance" then component.distance_units == "metres" ? "#{component.exercise_name} for #{pluralize(component.distance, 'metre')}" : "#{component.exercise_name} for #{pluralize(component.distance, 'kilometre')}"
   end
 end
 
+def component_heading_for_weight_entry(component)
+  heading = component_heading(component)
+  "#{pluralize(component.activity.sets, 'set')} of #{heading}"
+
+end
+
+
+
+def activity_rest(activity)
+  activity.rest_units == "seconds" ? "Rest for #{pluralize(activity.rest, 'second')}" : "Rest for #{pluralize(activity.rest, 'minute')}"
+end
 
 
 end

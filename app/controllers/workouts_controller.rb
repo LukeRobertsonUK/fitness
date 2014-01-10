@@ -83,4 +83,34 @@ class WorkoutsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def release
+    @workout = Workout.find(params[:id])
+    if @workout.status == "under_construction"
+      @workout.status = "released"
+      @workout.save!
+      redirect_to @workout, notice: 'Workout has been released from the Constructor and is now visible to the trainee.'
+    else
+      @workout.status = "released"
+      @workout.save!
+      redirect_to @workout, notice: 'Workout has been marked as incomplete.'
+    end
+  end
+
+  def complete
+    @workout = Workout.find(params[:id])
+    @workout.status = "complete"
+    @workout.save!
+     redirect_to @workout, notice: 'Workout has been marked as complete!'
+  end
+
+  def make_under_construction
+    @workout = Workout.find(params[:id])
+    @workout.status = "under_construction"
+    @workout.save!
+    redirect_to @workout, notice: 'Workout has been moved to the Constructor and is no longer visible to the trainee.'
+  end
+
 end
+
+

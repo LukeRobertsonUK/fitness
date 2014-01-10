@@ -20,7 +20,13 @@ FitnessApp::Application.routes.draw do
   end
 
 
-  resources :workouts
+  resources :workouts do
+    member do
+      put 'release', to: "workouts#release"
+      put 'complete', to: "workouts#complete"
+      put 'make_under_construction', to: "workouts#make_under_construction"
+    end
+  end
 
 
   resources :connections
@@ -34,6 +40,6 @@ FitnessApp::Application.routes.draw do
 
   devise_for :users
 
-root :to => "exercises#index"
+root :to => "workouts#index"
 get'/list', to: "exercises#list", as: 'list'
 end

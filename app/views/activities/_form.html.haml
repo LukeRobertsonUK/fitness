@@ -9,14 +9,18 @@
           %li= msg
   =f.hidden_field :workout_id, {value: @activity.workout_id}
 
+  %p How many times should the activity be repeated (the number of sets)?
   .field
     = f.label :sets
-    %br/
     = f.number_field :sets
   =render 'fields', f: f
+  %p What is the rest period at the end of each set?
   .field
     = f.label :rest
-    %br/
     = f.number_field :rest
+    = f.radio_button :rest_units, 'seconds', checked: true
+    = f.label :rest_units_seconds, 'seconds'
+    = f.radio_button :rest_units, 'minutes'
+    = f.label :rest_units_minutes, 'minutes'
   .actions
     = f.submit

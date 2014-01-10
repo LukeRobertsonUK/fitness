@@ -9,8 +9,22 @@
   = "Due: #{@workout.due_date}"
 %p
   = @workout.notes
-%p
-  = link_to "Edit", edit_workout_path(@workout)
+- if @workout.status == "under_construction"
+  %p
+    = link_to "Edit", edit_workout_path(@workout)
+- case @workout.status
+  - when "under_construction"
+    %p this workout is under construction and is not visible to the trainee
+  - when "released"
+    %p
+      this workout is visible to the trainee and available for them to complete (need to go back?
+      = link_to '', make_under_construction_workout_path(@workout), method: :put,  class: "glyphicon glyphicon-fast-backward"
+      )
+  - when "complete"
+    %p
+      this workout is complete (need to go back?
+      = link_to '', release_workout_path(@workout), method: :put,  class: "glyphicon glyphicon-fast-backward"
+      )
 
 %ul#activity_list
   = render @workout.activities
@@ -18,7 +32,14 @@
 
 
 
-%p
-  = link_to "Add An Activity", new_activity_path(workout_id: @workout.id)
+- if @workout.status == "under_construction"
+  = link_to "", new_activity_path(workout_id: @workout.id), class: "glyphicon glyphicon-plus minibutton add"
 
-= link_to 'Back', workouts_path
+= link_to '', workouts_path, class: "glyphicon glyphicon-arrow-left mediumbutton"
+- if @workout.status == "under_construction"
+  = link_to '', release_workout_path(@workout), method: :put, data: { confirm: 'Are you sure you want to release this workout to the trainee?' }, class: "glyphicon glyphicon-share mediumbutton"
+- elsif @workout.status == "released"
+  = link_to '', complete_workout_path(@workout), method: :put, class: "glyphicon glyphicon-ok mediumbutton add"
+
+
+

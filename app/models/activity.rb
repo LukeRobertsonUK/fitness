@@ -1,5 +1,5 @@
 class Activity < ActiveRecord::Base
-  attr_accessible :rest, :sets, :workout_id, :components_attributes
+  attr_accessible :rest, :sets, :workout_id, :components_attributes, :rest_units
   belongs_to :workout
   has_many :components
   has_many :exercises, through: :components
