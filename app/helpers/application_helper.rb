@@ -25,4 +25,8 @@ def weights_list(component)
   "(#{array.compact.map {|item| item.join('')}.join(', ')})"
 end
 
+def list_exercises(workout)
+  workout.components.order('created_at').map {|component| "#{component.exercise_name} (#{pluralize(component.activity.sets, 'set')})"}.join(", ")
+end
+
 end

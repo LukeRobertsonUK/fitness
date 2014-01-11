@@ -2,7 +2,10 @@ class WorkoutsController < ApplicationController
   # GET /workouts
   # GET /workouts.json
   def index
-    @workouts_under_construction = Workout.where({creator_id: current_user.id, status: "under_construction"})
+      @outstanding_workouts = Workout.where({user_id: current_user.id, status: "released"}).order('due_date')
+      @completed_workouts = Workout.where({user_id: current_user.id, status: "complete"}).order('completion_date DESC')
+
+
 
     respond_to do |format|
       format.html # index.html.erb
@@ -89,28 +92,24 @@ class WorkoutsController < ApplicationController
   def release
     @workout = Workout.find(params[:id])
     if @workout.status == "under_construction"
-      @workout.status = "released"
-      @workout.save!
+      @workout.release
       redirect_to @workout, notice: 'Workout has been released from the Constructor and is now visible to the trainee.'
     else
-      @workout.status = "released"
-      @workout.save!
+      @workout.mark_uncompleted
       redirect_to @workout, notice: 'Workout has been marked as incomplete.'
     end
   end
 
   def complete
     @workout = Workout.find(params[:id])
-    @workout.status = "complete"
+    @workout.mark_completed
     @workout.save!
-    @workout.update_personal_bests
-     redirect_to @workout, notice: 'Workout has been marked as complete!'
+    redirect_to @workout, notice: 'Workout has been marked as complete!'
   end
 
   def make_under_construction
     @workout = Workout.find(params[:id])
-    @workout.status = "under_construction"
-    @workout.save!
+    @workout.make_under_construction
     redirect_to @workout, notice: 'Workout has been moved to the Constructor and is no longer visible to the trainee.'
   end
 

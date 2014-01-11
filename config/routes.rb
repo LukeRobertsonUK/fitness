@@ -41,5 +41,6 @@ FitnessApp::Application.routes.draw do
   devise_for :users
 
 root :to => "workouts#index"
-get'/list', to: "exercises#list", as: 'list'
+get '/list', to: "exercises#list", as: 'list'
+get '/workout_constructor', to: "workouts_constructor#index"
 end

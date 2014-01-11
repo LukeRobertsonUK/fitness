@@ -1,19 +1,33 @@
-%h1 Workout Constructor
-%h2 I want to...
-%p
-    = link_to "Build a new workout for myself", new_workout_path(user_id: current_user.id)
-%p
-    = link_to "Build a new workout for a connection", connections_path
+%h1 Workouts
+%h2 Outstanding
+%ul
+  - @outstanding_workouts.each do |workout|
+    %li
+      = link_to "#{workout.title}", workout_path(workout)
+      %ul
+        %li
+          - if workout.creator == workout.user
+            created by me
+          -else
+            ="created by #{workout.creator.full_name}"
+        %li
+          = "due #{workout.due_date}"
+        %li
+          = list_exercises(workout)
 
-%h2 Under Construction
--@workouts_under_construction.each do |workout|
-    %p
-        = workout.title
-        | due:
-        = workout.due_date
-        | for:
-        = workout.user.email
-        | by:
-        =workout.creator.email
-        |
-        = link_to "show", workout_path(workout)
+
+%h2 Completed
+%ul
+  - @completed_workouts.each do |workout|
+    %li
+      = link_to "#{workout.title}", workout_path(workout)
+      %ul
+        %li
+          - if workout.creator == workout.user
+            created by me
+          -else
+            ="created by #{workout.creator.full_name}"
+        %li
+          = "completed #{workout.completion_date}"
+        %li
+          = list_exercises(workout)
