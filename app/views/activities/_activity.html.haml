@@ -4,8 +4,13 @@
     - activity.components.order('created_at').each do |component|
       %li
         = component_heading(component)
+        - unless component.weight_records.blank?
+          = weights_list(component)
         - if component.activity.workout.status == "released"
           = link_to "", edit_component_path(component), class: "glyphicon glyphicon-pencil minibutton"
+        -unless component.notes.blank?
+          %p
+            = component.notes
     %li
       = activity_rest(activity)
   - if @workout.status == "under_construction"

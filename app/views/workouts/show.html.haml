@@ -16,10 +16,13 @@
   - when "under_construction"
     %p this workout is under construction and is not visible to the trainee
   - when "released"
-    %p
-      this workout is visible to the trainee and available for them to complete (need to go back?
-      = link_to '', make_under_construction_workout_path(@workout), method: :put,  class: "glyphicon glyphicon-fast-backward"
-      )
+    - if @records.blank?
+      %p
+        this workout is visible to the trainee and available for them to complete (need to go back?
+        = link_to '', make_under_construction_workout_path(@workout), method: :put,  class: "glyphicon glyphicon-fast-backward"
+        )
+    - else
+      %p this workout is visible to the trainee and available for them to complete
   - when "complete"
     %p
       this workout is complete (need to go back?

@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
   has_many :personal_bests
   has_many :exercise_instructions
   has_many :activities, through: :workouts
+  has_many :components, through: :activities
+  has_many :weight_records, through: :components
 
 
 

@@ -15,6 +15,8 @@ class WorkoutsController < ApplicationController
   def show
     @workout = Workout.find(params[:id])
 
+    @records = @workout.components.map {|component| [component.notes, component.weight_records]}.flatten.compact
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @workout }
@@ -101,6 +103,7 @@ class WorkoutsController < ApplicationController
     @workout = Workout.find(params[:id])
     @workout.status = "complete"
     @workout.save!
+    @workout.update_personal_bests
      redirect_to @workout, notice: 'Workout has been marked as complete!'
   end
 

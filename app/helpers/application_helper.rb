@@ -15,11 +15,14 @@ def component_heading_for_weight_entry(component)
 
 end
 
-
-
 def activity_rest(activity)
   activity.rest_units == "seconds" ? "Rest for #{pluralize(activity.rest, 'second')}" : "Rest for #{pluralize(activity.rest, 'minute')}"
 end
 
+def weights_list(component)
+  array = []
+  component.weight_records.each {|record| array << [record.weight, record.weight_unit] }
+  "(#{array.compact.map {|item| item.join('')}.join(', ')})"
+end
 
 end
