@@ -100,4 +100,21 @@ class ConnectionsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def list_workouts
+    @connection = Connection.find(params[:id])
+
+    unless @connection.trainee == current_user
+      @trainee = @connection.trainee if @connection.confirmed
+      @trainer = @connection.trainer if @connection.confirmed
+    end
+
+    @outstanding_workouts = Workout.where({user_id: @trainee.id, creator_id: [@trainer.id, @trainee.id], status: "released"}).order('due_date')
+    @completed_workouts =  Workout.where({user_id: @trainee.id, creator_id: [@trainer.id, @trainee.id], status: "complete"}).order('completion_date DESC')
+
+    render 'workouts/index'
+
+  end
+
+
 end

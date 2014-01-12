@@ -29,7 +29,11 @@ FitnessApp::Application.routes.draw do
   end
 
 
-  resources :connections
+  resources :connections do
+    member do
+      get 'list_workouts', to: "connections#list_workouts"
+    end
+  end
 
 
   resources :exercises
@@ -43,4 +47,5 @@ FitnessApp::Application.routes.draw do
 root :to => "workouts#index"
 get '/list', to: "exercises#list", as: 'list'
 get '/workout_constructor', to: "workouts_constructor#index"
+
 end

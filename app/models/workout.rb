@@ -18,6 +18,7 @@ class Workout < ActiveRecord::Base
     copy.title = "Copy of #{self.title}"
     copy.user_interest_rating = nil
     copy.user_toughness_rating = nil
+    copy.completion_date = nil
     copy.save!
 
     self.activities.each do |activity|
@@ -32,7 +33,7 @@ class Workout < ActiveRecord::Base
         component_copy.save!
       end
     end
-
+  end
 
 
   def update_personal_bests
@@ -57,7 +58,7 @@ class Workout < ActiveRecord::Base
     self.save!
   end
 
-  def release
+  def make_released
     self.status = "released"
     self.save!
   end
@@ -66,7 +67,7 @@ class Workout < ActiveRecord::Base
     self.status = "under_construction"
     self.save!
   end
-end
+
 
 
 

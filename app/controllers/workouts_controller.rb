@@ -92,7 +92,7 @@ class WorkoutsController < ApplicationController
   def release
     @workout = Workout.find(params[:id])
     if @workout.status == "under_construction"
-      @workout.release
+      @workout.make_released
       redirect_to @workout, notice: 'Workout has been released from the Constructor and is now visible to the trainee.'
     else
       @workout.mark_uncompleted

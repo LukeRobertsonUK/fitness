@@ -1,4 +1,10 @@
-%h1 Workouts
+- if @trainee
+  %h1
+    ="#{@trainee.full_name} Workouts"
+  %p
+    = "You are connected to #{@trainee.first_name} as a trainer and can see workouts created by you and #{@trainee.first_name} only"
+- else
+  %h1 My Workouts
 %h2 Outstanding
 %ul
   - @outstanding_workouts.each do |workout|

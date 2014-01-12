@@ -7,6 +7,10 @@
       %ul
         - @workout.errors.full_messages.each do |msg|
           %li= msg
+
+  .field
+    =f.label :user_id, "This workout is for"
+    = f.select(:user_id, current_user.connections_as_trainer.reject{|c| c.confirmed != true}.map {|connection| [connection.trainee.full_name, connection.trainee.id]}.unshift(["Me", current_user.id]))
   .field
     = f.label :title
     %br/
@@ -19,7 +23,7 @@
     = f.label :due_date
     %br/
     = f.date_select :due_date
-  =f.hidden_field :user_id, {value: @workout.user_id}
+
   .actions
     - if @workout.status == nil
       = f.submit "Begin Construction"

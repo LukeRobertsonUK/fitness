@@ -1,5 +1,6 @@
 %h1
-  = @workout.user == current_user ? "Edit Personal Workout" : "Edit Workout for #{@workout.user.email}"
+  - if @workout.user
+    = @workout.user == current_user ? "Edit Personal Workout" : "Edit Workout for #{@workout.user.full_name}"
 %p
   Please enter a Title and Due-Date for this workout, and enter any notes or instructions to be displayed along with the workout.
 = render 'form'

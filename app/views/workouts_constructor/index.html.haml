@@ -19,4 +19,7 @@
     | by:
     =workout.creator.email
     |
-    = link_to "show", workout_path(workout)
+    -if (workout.user && workout.due_date)
+      = link_to "Continue Construction", workout_path(workout)
+    -else
+      = link_to "Begin Construction", edit_workout_path(workout)

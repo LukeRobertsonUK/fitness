@@ -12,6 +12,8 @@
     %li
       = connection.trainee.email
       = link_to "Set Workout", new_workout_path(user_id: connection.trainee.id)
+      |
+      = link_to "View Workouts", list_workouts_connection_path(connection)
 
 - unless @connection_requests.blank?
   %h2 Incoming Connection Requests
