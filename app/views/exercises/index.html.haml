@@ -1,0 +1,11 @@
+%h1 Exercises
+%p Here you can find a list of all the exercises stored in our system. The exercise names are crowd-sourced (if you enter an exercise that doesn't already exist during workout construction then it is created for you) and the creator of each exercise is saved in our system. If you find any of ther exercise names offensive then please click the report link and we'll investigate.
+
+%p Although the exercise names are crowd-sourced, you can add notes to any of them. These notes will be visible to you and your connected trainers and trainees.
+
+%ul
+  - @exercises.each do |exercise|
+    %li
+      = link_to "#{exercise.name}", exercise_path(exercise)
+      - if current_user.personal_best(exercise)
+        = "(#{pb_string(current_user, exercise)})"

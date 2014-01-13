@@ -29,4 +29,13 @@ def list_exercises(workout)
   workout.components.order('created_at').map {|component| "#{component.exercise_name} (#{pluralize(component.activity.sets, 'set')})"}.join(", ")
 end
 
+
+def snapshot(workout)
+  workout.activities.map { |activity| [activity.sets, "#{activity.components.order('created_at').map{|component| component.exercise_name}.to_sentence}"] }.map {|item| "#{pluralize(item[0], 'set')} of #{item[1]}"}.join(' | ')
+end
+
+def pb_string(user, exercise)
+  "Personal Best: #{(user.personal_best(exercise).weight).round(2)}kg / #{(user.personal_best(exercise).weight*WeightRecord::RATIO_OF_POUNDS_TO_KILOS).round(2)}lb"
+end
+
 end

@@ -1,8 +1,9 @@
-%h1 List of users who want to trainer
-%p users will come here to make outgoing connections to people they want to train them
+%h1 Find New Connections
+%p Search our user base for people you know. You can then send them a connection request, which will allow them to create workouts for you. It is anticipated that you already know they person you are connecting to and can identify them via their unique nickname. If you would like to create workouts for someone you know then ask them to create an account, let them know your nickname and ask them to send you a connection request.
 
 %ul
   - @users.each do |user|
     %li
       =user.email
-      = link_to "Connect", new_connection_path(trainer_id: user.id)
+      - unless user.is_trainer_of?(current_user)
+        = link_to "Connect", new_connection_path(trainer_id: user.id)

@@ -14,7 +14,7 @@ class ExercisesController < ApplicationController
   # GET /exercises
   # GET /exercises.json
   def index
-    @exercises = Exercise.all
+    @exercises = Exercise.order('name')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,6 +26,9 @@ class ExercisesController < ApplicationController
   # GET /exercises/1.json
   def show
     @exercise = Exercise.find(params[:id])
+    @users_note = ExerciseInstruction.where({exercise_id: @exercise.id, user_id: current_user.id}).first
+    @personal_best = current_user.personal_best(@exercise)
+
 
     respond_to do |format|
       format.html # show.html.erb

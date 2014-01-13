@@ -24,4 +24,23 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def is_trainer_of?(user)
+    Connection.where({trainee_id: user.id, trainer_id: self.id}).any?
+  end
+
+  def trainees
+    Connection.where(trainer_id: self.id).map {|connection| connection.trainee}
+  end
+
+  def trainers
+    Connection.where(trainee_id: self.id).map {|connection| connection.trainer}
+  end
+
+  def personal_best(exercise)
+    PersonalBest.where({user_id: self.id, exercise_id: exercise.id}).first
+  end
+
+  def exercise_notes(exercise)
+    ExerciseInstruction.where({user_id: self.id, exercise_id: exercise.id}).first
+  end
 end

@@ -1,0 +1,33 @@
+%p#notice= notice
+%h1
+  = @exercise.name
+-if @personal_best
+  %p
+    ="Personal Best: #{(@personal_best.weight).round(2)}kg / #{(@personal_best.weight*WeightRecord::RATIO_OF_POUNDS_TO_KILOS).round(2)}lb"
+
+- if @users_note
+  %p
+    = @users_note.description
+    = link_to "", edit_exercise_instruction_path(@users_note), class: "glyphicon glyphicon-edit minibutton"
+    = link_to '', @users_note, method: :delete, data: { confirm: 'Are you sure you want to delete this note?' }, class: "glyphicon glyphicon-remove-circle minibutton remove"
+- else
+  %p
+    You may add some notes or instructions to this exercise
+    = link_to "", new_exercise_instruction_path(exercise_id: @exercise.id), class: "glyphicon glyphicon-edit minibutton"
+
+-unless current_user.trainees.blank?
+  %h3 Your Trainees
+  %ul
+    - current_user.trainees.each do |trainee|
+      - if (trainee.personal_best(@exercise) || trainee.exercise_notes(@exercise))
+        %li
+          =trainee.full_name
+          =pb_string(trainee, @exercise) unless trainee.personal_best(@exercise).blank?
+          %p
+            = trainee.exercise_notes(@exercise).description unless trainee.exercise_notes(@exercise).blank?
+
+
+
+
+-unless current_user.trainers.blank?
+  %h3 Your Trainers

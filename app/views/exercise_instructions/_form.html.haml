@@ -1,0 +1,17 @@
+= form_for(@exercise_instruction) do |f|
+  - if @exercise_instruction.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@exercise_instruction.errors.count, "error")
+        prohibited this exercise_instruction from being saved:
+      %ul
+        - @exercise_instruction.errors.full_messages.each do |msg|
+          %li= msg
+
+  = f.hidden_field :exercise_id
+  .field
+    = f.label :description
+    %br/
+    = f.text_area :description
+  .actions
+    = f.submit

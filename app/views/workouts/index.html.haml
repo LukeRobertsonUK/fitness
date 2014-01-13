@@ -1,10 +1,10 @@
 - if @trainee
   %h1
-    ="#{@trainee.full_name} Workouts"
+    ="#{@trainee.first_name.possessive} Workouts"
   %p
     = "You are connected to #{@trainee.first_name} as a trainer and can see workouts created by you and #{@trainee.first_name} only"
 - else
-  %h1 My Workouts
+  %h1 Workouts
 %h2 Outstanding
 %ul
   - @outstanding_workouts.each do |workout|
@@ -19,7 +19,7 @@
         %li
           = "due #{workout.due_date}"
         %li
-          = list_exercises(workout)
+          = snapshot(workout)
 
 
 %h2 Completed
@@ -36,4 +36,4 @@
         %li
           = "completed #{workout.completion_date}"
         %li
-          = list_exercises(workout)
+          = snapshot(workout)

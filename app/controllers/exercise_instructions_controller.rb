@@ -25,6 +25,7 @@ class ExerciseInstructionsController < ApplicationController
   # GET /exercise_instructions/new.json
   def new
     @exercise_instruction = ExerciseInstruction.new
+    @exercise_instruction.exercise_id = params[:exercise_id]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,10 +42,11 @@ class ExerciseInstructionsController < ApplicationController
   # POST /exercise_instructions.json
   def create
     @exercise_instruction = ExerciseInstruction.new(params[:exercise_instruction])
+    @exercise_instruction.user_id = current_user.id
 
     respond_to do |format|
       if @exercise_instruction.save
-        format.html { redirect_to @exercise_instruction, notice: 'Exercise instruction was successfully created.' }
+        format.html { redirect_to @exercise_instruction.exercise, notice: 'Note was successfully created.' }
         format.json { render json: @exercise_instruction, status: :created, location: @exercise_instruction }
       else
         format.html { render action: "new" }
@@ -60,7 +62,7 @@ class ExerciseInstructionsController < ApplicationController
 
     respond_to do |format|
       if @exercise_instruction.update_attributes(params[:exercise_instruction])
-        format.html { redirect_to @exercise_instruction, notice: 'Exercise instruction was successfully updated.' }
+        format.html { redirect_to @exercise_instruction.exercise, notice: 'Note was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -76,7 +78,7 @@ class ExerciseInstructionsController < ApplicationController
     @exercise_instruction.destroy
 
     respond_to do |format|
-      format.html { redirect_to exercise_instructions_url }
+      format.html { redirect_to @exercise_instruction.exercise }
       format.json { head :no_content }
     end
   end

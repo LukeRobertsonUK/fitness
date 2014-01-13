@@ -1,0 +1,23 @@
+!!!
+%html
+  %head
+    %title FitnessApp
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    =link_to "Workouts", workouts_path
+    |
+    =link_to "Workout Constructor", workout_constructor_path
+    |
+    = link_to "Connections", connections_path
+    |
+    =link_to "Exercises", exercises_path
+    - if current_user
+      |
+      = link_to "Logout (#{current_user.email})", destroy_user_session_path, method: :delete
+
+    %p.notice= notice
+    %p.alert= alert
+
+    = yield

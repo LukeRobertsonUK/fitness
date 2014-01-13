@@ -65,8 +65,10 @@ class ActivitiesController < ApplicationController
     @exercises_hash = params[:activity][:components_attributes]
 
     @exercises_hash.each_value do |value|
-      exercise = Exercise.find_by_name(value[:exercise_name]){ |e| e.creator_id ||= current_user.id} unless value[:exercise_name].blank?
-      exercise.save!
+      unless value[:exercise_name].blank?
+        exercise = Exercise.find_by_name(value[:exercise_name]){ |e| e.creator_id ||= current_user.id}
+        exercise.save!
+      end
     end
 
     respond_to do |format|
